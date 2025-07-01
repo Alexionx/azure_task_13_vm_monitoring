@@ -44,13 +44,8 @@ New-AzVm `
 -VirtualNetworkName $virtualNetworkName `
 -SecurityGroupName $networkSecurityGroupName `
 -SshKeyName $sshKeyName `
--PublicIpAddressName $publicIpAddressName
-
-Write-Host "Призначення системно-призначеної ідентифікації до віртуальної машини $vmName ..."
-$vm = Get-AzVM -ResourceGroupName $resourceGroupName -Name $vmName
-$vm.Identity = New-Object -TypeName Microsoft.Azure.Management.Compute.Models.VirtualMachineIdentity
-$vm.Identity.Type = "SystemAssigned"
-Update-AzVM -ResourceGroupName $resourceGroupName -VM $vm
+-PublicIpAddressName $publicIpAddressName `
+-SystemAssignedIdentity
 
 # Очікування появи ВМ у ресурсній групі
 Write-Host "Очікування створення ВМ..."
